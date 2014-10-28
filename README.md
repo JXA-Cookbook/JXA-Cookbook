@@ -1,4 +1,4 @@
 JavaScript for Automation Cookbook
 ==================================
 
-![button.svg](Go to Wiki!)
+[![Go to Wiki!](button.svg)](https://github.com/dtinth/JXA-Cookbook/wiki)
