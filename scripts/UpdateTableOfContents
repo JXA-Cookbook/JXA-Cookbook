@@ -10,6 +10,7 @@ fi
 if (cd wiki && git log -1 --oneline) | grep TOCBOT
 then
   echo "No update"
+  exit 0
 fi
 
 scripts/GenerateTableOfContents
