@@ -1,0 +1,24 @@
+#!/usr/bin/env ruby
+
+home = File.read('wiki/Home.md')
+sidebar = File.read('wiki/_Sidebar.md')
+
+sidetoc = []
+
+home.gsub! %r{<span data-toc-begin="([A-Za-z0-9\-]+)"></span>([\s\S]*?)<span data-toc-end></span>} do
+  name = $1
+  url = "https://github.com/dtinth/JXA-Cookbook/wiki/#{name}"
+  page = `curl --compressed "#{url}"`
+  title = page.match(%r{<h1[^>]*>(.*?)</h1>})[1]
+  contents = page.scan %r{<a name="user-content-[^"]+"[^>]*href="(#[^"]+)"[^>]*>.*?</a>(.*?)</h2>}
+  toc = contents.map { |hash, title| "\n    * [[#{title}|#{name}#{hash}]]" }.join
+  sidetoc << %Q(\n * [[#{title}|#{name}]])
+  %Q(<span data-toc-begin="#{name}"></span>#{toc}<span data-toc-end></span>)
+end
+
+sidebar.gsub! %r{(<span data-toc-begin></span>)([\s\S]*)(<span data-toc-end></span>)} do
+  %Q(#{$1}\n#{sidetoc.join}#{$3})
+end
+
+File.write('wiki/Home.md', home)
+File.write('wiki/_Sidebar.md', sidebar)

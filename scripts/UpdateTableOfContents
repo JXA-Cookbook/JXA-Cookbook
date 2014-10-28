@@ -1,0 +1,18 @@
+#!/bin/bash -e
+
+if [ ! -e wiki ]
+then
+  git clone git@github.com:dtinth/JXA-Cookbook.wiki.git wiki
+else
+  (cd wiki && git fetch && git reset --hard origin/master)
+fi
+
+if (cd wiki && git log -1 --oneline) | grep TOCBOT
+then
+  echo "No update"
+fi
+
+scripts/GenerateTableOfContents
+(cd wiki && git commit -am 'TOCBOT: Update Table of Contents' && git push)
+
+
