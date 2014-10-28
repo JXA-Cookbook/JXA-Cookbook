@@ -17,6 +17,6 @@ Where it makes sense, I try to link to the official documentation as much as pos
 
 For ease of editing and contribution, the contents are on the [wiki][].
 
-[![Go to Wiki!](https://cdn.rawgit.com/dtinth/JXA-Cookbook/master/button.svg)][wiki]
+[<img src="https://cdn.rawgit.com/dtinth/JXA-Cookbook/master/button.svg">][wiki]
 
 [wiki]: (https://github.com/dtinth/JXA-Cookbook/wiki)
